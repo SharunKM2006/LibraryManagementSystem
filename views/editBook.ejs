@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Library</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/books" class="active">Books</a>
+        <a href="/borrow">Borrowed books</a>
+        <a href="/students">Students</a>
+        <a href="/visits">Library Visits</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div class="main">
+        <h1>Catalog Inventory Management</h1>
+        
+        <div class="main-page form-container-box">
+            <h3 class="form-title">Modify Book Information</h3>
+            
+            <form action="/books/edit/<%= book.BOOKID %>" method="POST">
+                <div class="input-group">
+                    <label class="form-label">System Book ID (Read-Only)</label>
+                    <input type="text" name="id" value="<%= book.BOOKID %>" readonly style="background-color: var(--bg-main); color: var(--text-muted); cursor: not-allowed;">
+                </div>
+
+                <div class="input-group">
+                    <label class="form-label">Book Title</label>
+                    <input type="text" name="title" value="<%= book.TITLE %>" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="form-label">Author Name</label>
+                    <input type="text" name="author" value="<%= book.AUTHOR %>" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="form-label">Total Available Quantity</label>
+                    <input type="number" name="quantity" value="<%= book.QUANTITY %>" required>
+                </div>
+                
+                <button type="submit" class="btn-submit-form">Update Book Records</button>
+            </form>
+            
+            <a href="/books" class="btn-cancel-link">&larr; Cancel and Back to Books List</a>
+        </div>
+    </div>
+</body>
+</html>

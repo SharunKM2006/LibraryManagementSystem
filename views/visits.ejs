@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Check-Ins</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Library</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/books">Books</a>
+        <a href="/borrow">Borrowed books</a>
+        <a href="/students">Students</a>
+        <a href="/visits" class="active">Library Visits</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div class="main">
+        <h1>Library Attendance Log</h1>
+
+        <div class="search-flex-container">
+            <a href="/visits/add" class="btn-add-book">Log New Visit</a>
+
+            <form action="/visits" method="GET" class="search-bar-form">
+                <input type="text" name="search" class="search-input-field" placeholder="Search by Logged USN..."
+                    value="<%= typeof search !== 'undefined' ? search : '' %>">
+                <button type="submit" class="btn-search-submit">Search</button>
+                <% if (typeof search !=='undefined' && search) { %>
+                    <a href="/visits" class="btn-search-clear">Clear Filter</a>
+                <% } %>
+            </form>
+        </div>
+
+        <div class="main-page">
+            <table>
+                <tr>
+                    <th>Log ID</th>
+                    <th>Student USN</th>
+                    <th>Time of Entry</th>
+                    <th>Time of Exit</th>
+                    <th>Session Duration</th>
+                    <th>Actions</th>
+                </tr>
+                <% visitLogs.forEach(log=> { %>
+                    <tr>
+                        <td><code>#<%= log.ID %></code></td>
+                        <td><strong><%= log.USN %></strong></td>
+                        <td><%= log.ENTRY_TIME %></td>
+                        <td>
+                            <% if(log.EXIT_TIME==='Active' ) { %>
+                                <span class="status-badge status-active">Inside</span>
+                            <% } else { %>
+                                <%= log.EXIT_TIME %>
+                            <% } %>
+                        </td>
+                        <td><%= log.DURATION %></td>
+                        <td>
+                            <% if(log.EXIT_TIME==='Active' ) { %>
+                                <form action="/visits/checkout/<%= log.ID %>" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-action-edit" style="background-color: var(--warning-bg); color: var(--warning);">Check Out</button>
+                                </form>
+                            <% } else { %>
+                                <a href="/visits/delete/<%= log.ID %>" class="btn-action-delete"
+                                    onclick="return confirm('Delete this archival traffic log?')">Remove</a>
+                            <% } %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

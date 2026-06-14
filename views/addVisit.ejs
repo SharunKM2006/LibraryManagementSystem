@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Entry Session</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Library</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/books">Books</a>
+        <a href="/borrow">Borrowed books</a>
+        <a href="/students">Students</a>
+        <a href="/visits" class="active">Library Visits</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div class="main">
+        <h1>Library Attendance Log</h1>
+        
+        <div class="main-page form-container-box">
+            <h3 class="form-title">Scan / Check-in Student</h3>
+            
+            <form action="/visits/add" method="POST">
+                <div class="input-group">
+                    <label class="form-label">Student University Seat Number (USN)</label>
+                    <input type="text" name="usn" placeholder="e.g., 1MS23CS001" required autocomplete="off">
+                </div>
+                
+                <button type="submit" class="btn-submit-form">Record Entry Timestamp</button>
+            </form>
+            
+            <a href="/visits" class="btn-cancel-link">&larr; Cancel and Go Back</a>
+        </div>
+    </div>
+</body>
+</html>
