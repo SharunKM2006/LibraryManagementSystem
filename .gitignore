@@ -29,3 +29,6 @@ Thumbs.db
 
 # Freebuff desktop tool state
 .freebuff/
+
+.vercel
+.env*
